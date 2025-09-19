@@ -5,12 +5,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 const createSchedule = (showDateTime) => {
   return [
     { label: "🎟️ 20 min FOH Call", time: new Date(showDateTime.getTime() - 20 * 60000), type: "foh", audioBase: "foh_20min" },
-    { label: "🎙️ 15 min Call (Backstage)", time: new Date(showDateTime.getTime() - 20 * 60000), type: "backstage", audio: "15min.wav" },
+    { label: "🎙️ 15 min Call (Backstage)", time: new Date(showDateTime.getTime() - 20 * 60000), type: "backstage", audio: "15min.mp3" },
     { label: "🎟️ 10 min FOH Call", time: new Date(showDateTime.getTime() - 10 * 60000), type: "foh", audioBase: "foh_10min" },
-    { label: "🎙️ 10 min Call (Backstage)", time: new Date(showDateTime.getTime() - 15 * 60000), type: "backstage", audio: "10min.wav" },
-    { label: "🎙️ 5 min Call (Backstage)", time: new Date(showDateTime.getTime() - 10 * 60000), type: "backstage", audio: "5min.wav" },
+    { label: "🎙️ 10 min Call (Backstage)", time: new Date(showDateTime.getTime() - 15 * 60000), type: "backstage", audio: "10min.mp3" },
+    { label: "🎙️ 5 min Call (Backstage)", time: new Date(showDateTime.getTime() - 10 * 60000), type: "backstage", audio: "5min.mp3" },
     { label: "🎟️ 5 min FOH Call", time: new Date(showDateTime.getTime() - 5 * 60000), type: "foh", audioBase: "foh_5min" },
-    { label: "🎙️ Beginners (Backstage)", time: new Date(showDateTime.getTime() - 5 * 60000), type: "backstage", audio: "beginners.wav" },
+    { label: "🎙️ Beginners (Backstage)", time: new Date(showDateTime.getTime() - 5 * 60000), type: "backstage", audio: "beginners.mp3" },
     { label: "🎟️ About to start (3 min)", time: new Date(showDateTime.getTime() - 3 * 60000), type: "foh", audioBase: "foh_3min" },
     { label: "🎟️ About to start (2 min)", time: new Date(showDateTime.getTime() - 2 * 60000), type: "foh", audioBase: "foh_2min" },
   ];
@@ -132,7 +132,7 @@ export function useShowScheduler({
           addLog(call.label);
           if (call.type === "foh") {
             const suffix = mediaAllowed ? "allowed" : "not_allowed";
-            playAudio(`${call.audioBase}_${suffix}.wav`, "foh");
+            playAudio(`${call.audioBase}_${suffix}.mp3`, "foh");
           } else {
             playAudio(call.audio, "backstage");
           }
@@ -199,7 +199,7 @@ export function useShowScheduler({
 
   const houseOpen = () => {
     addLog("🏠 House Open");
-    playAudio("house_open.wav", "foh");
+    playAudio("house_open.mp3", "foh");
   };
   
   const setPresetTime = (h, m) => {

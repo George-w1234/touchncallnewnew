@@ -79,9 +79,9 @@ export default function ShowCallSchedulerPage() {
     setShowConfirmDialog(false);
   };
 
-  const handleTestFoh = () => scheduler.playAudio("foh_test.wav", "foh");
+  const handleTestFoh = () => scheduler.playAudio("foh_test.mp3", "foh");
   const handleTestBackstage = () =>
-    scheduler.playAudio("backstage_test.wav", "backstage");
+    scheduler.playAudio("backstage_test.mp3", "backstage");
 
   if (isLocked) {
     return (
