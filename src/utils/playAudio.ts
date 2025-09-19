@@ -1,30 +1,23 @@
-// src/utils/playAudio.ts
+export const playAudio = async (file: string) => {
+  try {
+    // Always use relative path so it works on any port/host
+    const url = `/audio/${file}`;
+    console.log("🔊 Attempting to play:", url);
 
-export const playAudio = (fileName: string) => {
-  const path = `/audio/${fileName}`;
-  const audio = new Audio(path);
+    const audio = new Audio(url);
 
-  // Add detailed error logging
-  audio.addEventListener('error', () => {
-    const error = audio.error;
-    if (error) {
-      const messages: Record<number, string> = {
-        1: 'MEDIA_ERR_ABORTED – fetching process aborted by user',
-        2: 'MEDIA_ERR_NETWORK – a network error occurred while fetching audio',
-        3: 'MEDIA_ERR_DECODE – audio decoding failed',
-        4: 'MEDIA_ERR_SRC_NOT_SUPPORTED – unsupported audio format or bad path',
-      };
-      console.error(`Audio error (code ${error.code}) for ${path}: ${messages[error.code]}`);
-    } else {
-      console.error(`Unknown audio error for ${path}`);
-    }
-  });
-
-  audio.play()
-    .then(() => {
-      console.log(`✅ Playing audio: ${path}`);
-    })
-    .catch((err) => {
-      console.error(`❌ Could not play audio: ${path}`, err);
+    // For debugging: log when loaded
+    audio.addEventListener("canplaythrough", () => {
+      console.log("✅ Audio can play through:", url);
     });
+
+    audio.addEventListener("error", (e) => {
+      console.error("❌ Audio element error:", e, "for", url);
+    });
+
+    await audio.play();
+    console.log("▶️ Playback started:", url);
+  } catch (err) {
+    console.error("Audio playback failed:", err);
+  }
 };
