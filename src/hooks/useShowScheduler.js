@@ -80,7 +80,7 @@ export function useShowScheduler({
       }
 
       try {
-        const audio = new Audio(`..public/audio/${filename}`);
+        const audio = new Audio(`/public/audio/${filename}`);
         if (audioContextRef.current && audioContextRef.current.state !== "closed") {
           const source = audioContextRef.current.createMediaElementSource(audio);
           const gainNode = audioContextRef.current.createGain();
